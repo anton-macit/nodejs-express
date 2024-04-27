@@ -2,7 +2,7 @@
 import { query } from "./__query";
 import { Todo } from "../generated/database";
 import { PayloadPatchTodos__id__ } from "../api/todos/__id__/patch_todos___id__";
-import { PayloadPostTodosCreateRequest } from "../api/todos/post_todos";
+import { PayloadPostTodos } from "../api/todos/post_todos";
 
 export const getDbTodo = async (id: string): Promise<Todo | undefined> =>
   (await query("select * from todo where id = $1", [id])).rows[0];
@@ -18,9 +18,7 @@ export const updateDbTodo = async (
     )
   ).rows[0] as Todo) ?? undefined;
 
-export const insertDbTodo = async (
-  body: PayloadPostTodosCreateRequest,
-): Promise<Todo> =>
+export const insertDbTodo = async (body: PayloadPostTodos): Promise<Todo> =>
   (
     await query(
       "insert into todo(content, priority) values($1, $2) returning *",

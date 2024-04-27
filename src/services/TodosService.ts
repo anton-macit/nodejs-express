@@ -7,7 +7,7 @@ import {
 } from "@Repositories/TodosRepository";
 import { Todo } from "../generated/database";
 import { PayloadPatchTodos__id__ } from "../api/todos/__id__/patch_todos___id__";
-import { PayloadPostTodosCreateRequest } from "../api/todos/post_todos";
+import { PayloadPostTodos } from "../api/todos/post_todos";
 
 export const getTodoItemService = (id: string): Promise<Todo | undefined> =>
   getDbTodo(id);
@@ -17,9 +17,8 @@ export const updateTodoItemService = (
   body: PayloadPatchTodos__id__,
 ): Promise<Todo | undefined> => updateDbTodo(id, body);
 
-export const createTodoItemService = (
-  body: PayloadPostTodosCreateRequest,
-): Promise<Todo> => insertDbTodo(body);
+export const createTodoItemService = (body: PayloadPostTodos): Promise<Todo> =>
+  insertDbTodo(body);
 
 export const listTodoItemsService = (
   offset: number,

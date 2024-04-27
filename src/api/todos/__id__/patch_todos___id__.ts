@@ -2,7 +2,7 @@
 // noinspection JSUnusedGlobalSymbols
 
 import * as yup from "yup";
-import { ITodoItem } from "../post_todos";
+import { ResponsePostTodos } from "../post_todos";
 
 export const RoutePatchTodos__id__ = "/todos/:id";
 
@@ -14,4 +14,4 @@ export const patchTodosCreateRequest = yup.object({
 export interface PayloadPatchTodos__id__
   extends yup.InferType<typeof patchTodosCreateRequest> {}
 
-export type ResponsePatchTodos__id__ = ITodoItem;
+export type ResponsePatchTodos__id__ = ResponsePostTodos;
