@@ -1,7 +1,7 @@
 // noinspection JSUnusedGlobalSymbols
 
 import * as yup from "yup";
-import { ITodoItem } from "./post_todos";
+import { ResponsePostTodos } from "./post_todos";
 
 export const RouteGetTodos = "/todos";
 
@@ -13,7 +13,7 @@ export const paramsGetTodos = yup.object({
 export interface ParamsGetTodos extends yup.InferType<typeof paramsGetTodos> {}
 
 export interface ResponseGetTodos {
-  items: ITodoItem[];
+  items: ResponsePostTodos[];
   offset?: number;
   limit?: number;
 }

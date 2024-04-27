@@ -7,10 +7,10 @@ export const postTodosCreateRequest = yup.object({
   priority: yup.number().required(),
 });
 
-export interface PayloadPostTodosCreateRequest
+export interface PayloadPostTodos
   extends yup.InferType<typeof postTodosCreateRequest> {}
 
-export interface ITodoItem extends PayloadPostTodosCreateRequest {
+export interface ResponsePostTodos extends PayloadPostTodos {
   id: string; // uuid v4
   created_at: string | Date; // date
 }

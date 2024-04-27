@@ -5,15 +5,13 @@ import {
 } from "@Services/TodosService";
 import { paramsGetTodos, ResponseGetTodos } from "../api/todos/get_todos";
 import {
-  PayloadPostTodosCreateRequest,
+  PayloadPostTodos,
   postTodosCreateRequest,
 } from "../api/todos/post_todos";
 
 export const createTodoItem = async (req: Request, res: Response) => {
   await postTodosCreateRequest.validate(req.body);
-  const response = await createTodoItemService(
-    req.body as PayloadPostTodosCreateRequest,
-  );
+  const response = await createTodoItemService(req.body as PayloadPostTodos);
   res.json(response);
 };
 
