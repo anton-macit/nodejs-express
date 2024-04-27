@@ -1,0 +1,178 @@
+openapi: 3.0.0
+info:
+  title: Todo API
+  version: 0.1.0
+servers:
+  - url: http://example.com
+    description: Example server
+tags:
+  - name: todo
+    description: Everything about your ToDo items
+paths:
+  /todos:
+    get:
+      tags:
+        - todo
+      summary: Returns a list of todo items
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          required: false
+          description: Default value is 0
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: false
+          description: Default value is 10
+      responses:
+        '200':
+          description: A JSON array of todo items
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - items
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TodoItem"
+                  offset:
+                    type: integer
+                    description: Default value is 0
+                  limit:
+                    type: integer
+                    description: Default value is 10
+    post:
+      tags:
+        - todo
+      summary: Create a new todo item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTodoItemDto"
+      responses:
+        '201':
+          description: A new JSON todo item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoItem"
+  /todos/{id}:
+    get:
+      tags:
+        - todo
+      summary: Returns a todo item
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: UUID
+          required: true
+      responses:
+        '200':
+          description: A JSON todo item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoItem"
+        '404':
+          description: Not found
+    patch:
+      tags:
+        - todo
+      summary: Update a todo item
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: UUID
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTodoItemDto"
+      responses:
+        '200':
+          description: A JSON todo item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoItem"
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - todo
+      summary: Delete a todo item
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: UUID
+          required: true
+      responses:
+        '200':
+          description: Deleted
+        '404':
+          description: Not found
+components:
+  schemas:
+    TodoItem:
+      title: TodoItem
+      type: object
+      required:
+        - id
+        - content
+        - priority
+        - created_at
+      properties:
+        id:
+          title: id
+          description: type UUID
+          type: string
+          format: uuid
+        content:
+          title: content
+          type: string
+        priority:
+          title: priority
+          type: integer
+        created_at:
+          title: created_at
+          description: type Date
+          type: string
+    CreateTodoItemDto:
+      title: Create TodoItem DTO
+      type: object
+      required:
+        - content
+        - priority
+      properties:
+        content:
+          title: content
+          type: string
+        priority:
+          title: priority
+          type: integer
+    UpdateTodoItemDto:
+      title: Update TodoItem DTO
+      type: object
+      properties:
+        content:
+          title: content
+          type: string
+        priority:
+          title: priority
+          type: integer
