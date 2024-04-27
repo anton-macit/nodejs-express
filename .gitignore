@@ -10,7 +10,6 @@ test-report.html
 node_modules/
 dist/
 tmp/
-coverage/
 
 # Compiled Java class files
 *.class
