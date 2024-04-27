@@ -1,0 +1,7 @@
+# Note. This file is a copy from FE
+# Also check .prettierignore
+src/generated/
+dist/
+node_modules/
+*.d.ts
+*.cy.js
