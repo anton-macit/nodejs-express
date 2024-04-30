@@ -19,6 +19,5 @@
 - `utils` - utils functionality
 
 TODO:
-- add user entity and JWT auth
 - add ORM
 - one more implementation - on MongoDB

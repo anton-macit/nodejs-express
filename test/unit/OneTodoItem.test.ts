@@ -11,7 +11,13 @@ describe("TodosService tests", () => {
       .mockImplementation((todoId) =>
         Promise.resolve(
           todoId === "1"
-            ? { id: "1", content: "1", priority: 0, created_at: new Date() }
+            ? {
+                id: "1",
+                content: "1",
+                priority: 0,
+                created_at: new Date(),
+                user: "",
+              }
             : undefined,
         ),
       );
@@ -26,6 +32,7 @@ describe("TodosService tests", () => {
                 content: body.content ?? "1",
                 priority: body.priority ?? 0,
                 created_at: new Date(),
+                user: "",
               }
             : undefined,
         ),
