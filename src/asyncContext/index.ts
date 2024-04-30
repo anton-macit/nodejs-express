@@ -9,6 +9,8 @@ export class AsyncContext {
 
   azureTraceParent?: string | null | undefined;
 
+  private _userId?: string | undefined; // UUID
+
   constructor(params: {
     correlationId: string;
     spanId?: string;
@@ -17,6 +19,19 @@ export class AsyncContext {
     this.correlationId = params.correlationId;
     this.spanId = params.spanId;
     this.azureTraceParent = params.azureTraceParent;
+  }
+
+  public set userId(userId: string) {
+    this._userId = userId;
+  }
+
+  public get userId(): string {
+    return (
+      this._userId ||
+      (() => {
+        throw new Error("Cannot get userId from context");
+      })()
+    );
   }
 }
 

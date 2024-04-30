@@ -2,6 +2,7 @@ import convict from "convict";
 import * as process from "process";
 import { local } from "./local";
 import { test } from "./test";
+import "dotenv/config";
 
 const configs: any = {
   local,
@@ -44,6 +45,34 @@ export const config = convict({
     format: Number,
     env: "DB_MAX_CONNECTION",
     default: 2,
+  },
+  superAdmin: {
+    username: {
+      doc: "SuperAdmin username",
+      format: String,
+      env: "SUPER_ADMIN_USERNAME",
+      default: "admin",
+    },
+    password: {
+      doc: "SuperAdmin password",
+      format: String,
+      env: "SUPER_ADMIN_PASSWORD",
+      default: "", // should be defined via the env variable
+    },
+  },
+  jwt: {
+    secret: {
+      format: String,
+      default: "", // should be defined via the env variable
+      env: "JWT_SECRET",
+      sensitive: true,
+    },
+    expiresIn: {
+      format: String,
+      /** expressed in seconds or a string describing a time span [zeit/ms](https://github.com/zeit/ms.js).  Eg: 60, "2 days", "10h", "7d" */
+      default: "1h",
+      env: "JWT_EXPIRES_IN",
+    },
   },
 });
 
