@@ -1,13 +1,14 @@
 import { config } from "@Config";
 import * as jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { User } from "../generated/database";
+import { IUser } from "../dbEntities/User";
+import { ResponsePostUsers } from "../api/users/post_users";
 
-export type UserDto = Omit<User, "hash">;
+export type UserDto = ResponsePostUsers;
 
-export const dbUserToUserDto = (dbUser: User): UserDto => {
-  const { hash, ...user } = dbUser;
-  return user satisfies UserDto;
+export const dbUserToUserDto = (dbUser: IUser): UserDto => {
+  const { hash, _id, ...user } = dbUser;
+  return { ...user, id: _id.toString() } satisfies UserDto;
 };
 
 export interface JwtPayload {

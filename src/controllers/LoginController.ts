@@ -6,8 +6,8 @@ import {
   UserDto,
 } from "@Services/jwtService";
 import { config } from "@Config";
-import { randomUUID } from "crypto";
 import { selectDbUser } from "@Repositories/UsersRepository";
+import mongoose from "mongoose";
 import { PayloadPostLogin, postLoginRequest } from "../api/post_login";
 import LoginError from "../errors/LoginError";
 
@@ -24,9 +24,11 @@ export const loginController = async (req: Request, res: Response) => {
     }
 
     user = {
-      id: randomUUID(),
+      id: new mongoose.Types.ObjectId().toString(),
       username: body.username,
       created_at: new Date(),
+      updated_at: new Date(),
+      __v: 0,
     } satisfies UserDto;
   } else {
     const dbUser = await selectDbUser(body.username);

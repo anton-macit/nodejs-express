@@ -9,7 +9,7 @@ export class AsyncContext {
 
   azureTraceParent?: string | null | undefined;
 
-  private _userId?: string | undefined; // UUID
+  private _userId: string | undefined;
 
   constructor(params: {
     correlationId: string;

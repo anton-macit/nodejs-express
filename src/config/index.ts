@@ -34,10 +34,10 @@ export const config = convict({
     default: "info",
     env: "LOG_LEVEL",
   },
-  dbConnectionString: {
+  mongodbConnectionString: {
     doc: "DB connection string",
     format: String,
-    env: "DB_CONNECTION_STRING",
+    env: "MONGODB_CONNECTION_STRING",
     default: "",
   },
   dbMaxConnection: {

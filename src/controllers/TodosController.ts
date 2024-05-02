@@ -24,5 +24,9 @@ export const listTodosItems = async (req: Request, res: Response) => {
   const limit = params.limit ?? 10;
   const items = await listTodoItemsService(offset, limit);
 
-  res.json({ items, offset, limit } satisfies ResponseGetTodos);
+  res.json({
+    items,
+    offset,
+    limit,
+  } satisfies ResponseGetTodos);
 };
