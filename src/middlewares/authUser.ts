@@ -27,7 +27,7 @@ export const userOnly = (req: Request, res: Response, next: NextFunction) => {
   if (user?.username === config.get("superAdmin.username")) {
     throw new HttpForbidden();
   }
-  // we trust token and not double-check user in DB
+  // we trust token and not to double-check user in DB
   getAsyncContext().userId = user.id;
 
   next();
