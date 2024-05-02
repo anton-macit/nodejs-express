@@ -1,17 +1,15 @@
-import { query } from "./__query";
-import { User } from "../generated/database";
+import { getHash } from "@Services/jwtService";
+import { IUser, User } from "../dbEntities/User";
+import { PayloadPostUsers } from "../api/users/post_users";
 
-export const insertDbUser = async (
-  body: Omit<User, "id" | "created_at">,
-): Promise<User> =>
-  (
-    await query(
-      'insert into "user"(username, hash) values($1, $2) returning *',
-      [body.username, body.hash],
-    )
-  ).rows[0];
+export const insertDbUser = async (body: PayloadPostUsers): Promise<IUser> => {
+  const user = await new User({
+    username: body.username,
+    hash: await getHash(body.password),
+  }).save({ validateBeforeSave: true });
+  return user.toObject();
+};
 
 export const selectDbUser = async (
   username: string,
-): Promise<User | undefined> =>
-  (await query('select * from "user" where username = $1', [username])).rows[0];
+): Promise<IUser | undefined> => (await User.findOne({ username }))?.toObject();

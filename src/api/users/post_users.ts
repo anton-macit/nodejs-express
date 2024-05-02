@@ -13,4 +13,6 @@ export interface PayloadPostUsers
 export interface ResponsePostUsers extends Omit<PayloadPostUsers, "password"> {
   id: string; // uuid v4
   created_at: string | Date; // date
+  updated_at: string | Date; // date
+  __v: number;
 }

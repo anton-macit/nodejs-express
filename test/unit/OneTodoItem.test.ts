@@ -3,24 +3,25 @@ import {
   getTodoItemService,
   updateTodoItemService,
 } from "@Services/TodosService";
+import mongoose from "mongoose";
 
 describe("TodosService tests", () => {
   beforeEach(() => {
-    jest
-      .spyOn(todoRepository, "getDbTodo")
-      .mockImplementation((todoId) =>
-        Promise.resolve(
-          todoId === "1"
-            ? {
-                id: "1",
-                content: "1",
-                priority: 0,
-                created_at: new Date(),
-                user: "",
-              }
-            : undefined,
-        ),
-      );
+    jest.spyOn(todoRepository, "getDbTodo").mockImplementation((_id) =>
+      Promise.resolve(
+        _id === "1"
+          ? {
+              _id: new mongoose.Types.ObjectId("1"),
+              content: "1",
+              priority: 0,
+              created_at: new Date(),
+              updated_at: new Date(),
+              user_id: new mongoose.Types.ObjectId("1"),
+              __v: 0,
+            }
+          : undefined,
+      ),
+    );
 
     jest
       .spyOn(todoRepository, "updateDbTodo")
@@ -28,11 +29,13 @@ describe("TodosService tests", () => {
         Promise.resolve(
           todoId === "1"
             ? {
-                id: "1",
+                _id: new mongoose.Types.ObjectId("1"),
                 content: body.content ?? "1",
                 priority: body.priority ?? 0,
                 created_at: new Date(),
-                user: "",
+                updated_at: new Date(),
+                user_id: new mongoose.Types.ObjectId("1"),
+                __v: 0,
               }
             : undefined,
         ),

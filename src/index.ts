@@ -5,7 +5,10 @@ import fileUpload from "express-fileupload";
 import { log, morganMiddleware } from "@Log";
 import { config } from "@Config";
 import { error } from "@Utils/error";
-import { closeDbConnections } from "@Repositories/__query";
+import {
+  closeDbConnections,
+  getOrCreateDbConnection,
+} from "@Repositories/__query";
 import { router } from "./router";
 import { generateCorrelationIdMiddleware } from "./middlewares";
 
@@ -48,9 +51,15 @@ app.use(((err, req, res, next) => {
   next(err);
 }) as ErrorRequestHandler);
 
-app.listen(config.get("port"), () => {
-  log.info(`Server is running at 'http://localhost:${config.get("port")}'`);
-});
+getOrCreateDbConnection()
+  .then(() =>
+    app.listen(config.get("port"), () => {
+      log.info(`Server is running at 'http://localhost:${config.get("port")}'`);
+    }),
+  )
+  .catch((e) => {
+    log.error("Uncaught error in startup, SERVER Error", e);
+  });
 
 // noinspection JSUnusedGlobalSymbols
 // catching signals and do something before exit
