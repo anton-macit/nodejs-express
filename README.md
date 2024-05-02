@@ -10,5 +10,5 @@
 - `.yarnrc` To lock packages versions in `yarn.lock`. To update `yarn.lock` run `mv .yarnrc .yarnrc- ; yarn ; mv .yarnrc- .yarnrc`
 
 TODO:
-- test coverage should be increased
+- test coverage should be increased (jwtService and Controllers)
 - deploy to AWS should be added
