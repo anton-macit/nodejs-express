@@ -6,7 +6,7 @@ exports.up = (pgm) => {
   pgm.sql(`
     CREATE TABLE IF NOT EXISTS "user" (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        username varchar NOT NULL ,
+        username varchar NOT NULL,
         hash varchar NOT NULL,
         created_at TIMESTAMP NOT NULL DEFAULT NOW()        
     );
