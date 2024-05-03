@@ -6,6 +6,7 @@ import {
   listTodoItemsService,
   updateTodoItemService,
 } from "@Services/TodosService";
+import mongoose from "mongoose";
 
 describe("TodosService tests", () => {
   beforeEach(() => {
@@ -13,11 +14,13 @@ describe("TodosService tests", () => {
       Promise.resolve(
         todoId === "1"
           ? {
-              id: "1",
+              _id: new mongoose.Types.ObjectId(),
               content: "1",
               priority: 0,
               created_at: new Date(),
-              user: "",
+              updated_at: new Date(),
+              user_id: new mongoose.Types.ObjectId(),
+              __v: 0,
             }
           : undefined,
       ),
@@ -29,11 +32,14 @@ describe("TodosService tests", () => {
         Promise.resolve(
           todoId === "1"
             ? {
-                id: "1",
                 content: body.content ?? "1",
                 priority: body.priority ?? 0,
                 created_at: new Date(),
                 user: "",
+                _id: new mongoose.Types.ObjectId(),
+                updated_at: new Date(),
+                user_id: new mongoose.Types.ObjectId(),
+                __v: 0,
               }
             : undefined,
         ),
@@ -41,11 +47,14 @@ describe("TodosService tests", () => {
 
     jest.spyOn(todoRepository, "insertDbTodo").mockImplementation((body) =>
       Promise.resolve({
-        id: "1",
         content: body.content ?? "1",
         priority: body.priority ?? 0,
         created_at: new Date(),
         user: "",
+        _id: new mongoose.Types.ObjectId(),
+        updated_at: new Date(),
+        user_id: new mongoose.Types.ObjectId(),
+        __v: 0,
       }),
     );
 
@@ -55,11 +64,14 @@ describe("TodosService tests", () => {
       .mockImplementation((_offset, _limit) =>
         Promise.resolve([
           {
-            id: "1",
             content: "1",
             priority: 0,
             created_at: new Date(),
             user: "",
+            _id: new mongoose.Types.ObjectId(),
+            updated_at: new Date(),
+            user_id: new mongoose.Types.ObjectId(),
+            __v: 0,
           },
         ]),
       );
