@@ -12,3 +12,4 @@ export type { TodoItem } from './models/TodoItem';
 export type { UpdateTodoItemDto } from './models/UpdateTodoItemDto';
 
 export { TodoService } from './services/TodoService';
+export { UserService } from './services/UserService';
