@@ -20,4 +20,3 @@
 
 TODO:
 - add ORM
-- one more implementation - on MongoDB

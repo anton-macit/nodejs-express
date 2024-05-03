@@ -19,9 +19,6 @@ export interface JwtPayload {
 
 export const getJwtToken = (data: JwtPayload) => {
   const jwtSecret = config.get("jwt.secret");
-  if (jwtSecret === "") {
-    throw new Error("Empty JWT secret");
-  }
   return jwt.sign(data, jwtSecret, {
     expiresIn: data.expiresIn,
   });

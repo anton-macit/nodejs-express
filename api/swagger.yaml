@@ -2,13 +2,86 @@ openapi: 3.0.0
 info:
   title: Todo API
   version: 0.1.0
-servers:
-  - url: http://example.com
-    description: Example server
 tags:
   - name: todo
-    description: Everything about your ToDo items
+    description: Everything about your ToDo items. Admin cannot do those requests
+  - name: user
+    description: Everything about your users
 paths:
+  /login:
+    post:
+      tags:
+        - user
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login successful. Use `auth_token` for HTTP `Authorization Bearer` header
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - auth_token
+                properties:
+                  auth_token:
+                    type: string
+        '403':
+          description: Forbidden. User does not exist with the provided credentials
+  /users:
+    post:
+      tags:
+        - user
+      summary: Create user. Only admin can do it
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: A new user created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - username
+                  - created_at
+                properties:
+                  id:
+                    type: string
+                  username:
+                    type: string
+                  created_at:
+                    description: Date
+                    type: string
+        '401':
+          description: Unauthorized
+
   /todos:
     get:
       tags:
@@ -47,6 +120,8 @@ paths:
                   limit:
                     type: integer
                     description: Default value is 10
+        '401':
+          description: Unauthorized. Token expired
     post:
       tags:
         - todo
@@ -64,6 +139,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TodoItem"
+        '401':
+          description: Unauthorized. Token expired
   /todos/{id}:
     get:
       tags:
@@ -83,6 +160,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TodoItem"
+        '401':
+          description: Unauthorized. Token expired
         '404':
           description: Not found
     patch:
@@ -109,6 +188,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TodoItem"
+        '401':
+          description: Unauthorized. Token expired
         '404':
           description: Not found
     delete:
@@ -125,6 +206,8 @@ paths:
       responses:
         '200':
           description: Deleted
+        '401':
+          description: Unauthorized. Token expired
         '404':
           description: Not found
 components:
