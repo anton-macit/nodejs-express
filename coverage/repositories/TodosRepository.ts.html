@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.38% </span>
+                <span class="strong">54.54% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/21</span>
+                <span class='fraction'>12/22</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/14</span>
+                <span class='fraction'>7/14</span>
             </div>
         
             
@@ -106,7 +106,20 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,21 +128,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,14 +149,47 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// import { log } from "@Log";
+import { getAsyncContext } from "@Async";
 import { query } from "./__query";
 import { Todo } from "../generated/database";
 import { PayloadPatchTodos__id__ } from "../api/todos/__id__/patch_todos___id__";
-import { PayloadPostTodosCreateRequest } from "../api/todos/post_todos";
+import { PayloadPostTodos } from "../api/todos/post_todos";
 &nbsp;
 export const getDbTodo = <span class="fstat-no" title="function not covered" >async (i</span>d: string): Promise&lt;Todo | undefined&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >  (await query("select * from todo where id = $1", [id])).rows[0];</span>
+<span class="cstat-no" title="statement not covered" >  (</span>
+    await query(
+      `select *
+                from todo
+                where id = $1
+                  and "user" = $2`,
+      [id, getAsyncContext().userId],
+    )
+  ).rows[0];
 &nbsp;
 export const updateDbTodo = <span class="fstat-no" title="function not covered" >async (</span>
   id: string,
@@ -164,18 +197,16 @@ export const updateDbTodo = <span class="fstat-no" title="function not covered" 
 ): Promise&lt;Todo | undefined&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 <span class="cstat-no" title="statement not covered" >  ((</span>
     await query(
-      "update todo set content = COALESCE($2, content), priority = COALESCE($3, priority) where id = $1 returning *",
-      [id, body.content, body.priority],
+      "update todo set content = COALESCE($2, content), priority = COALESCE($3, priority) where id = $1 and user = $4 returning *",
+      [id, body.content, body.priority, getAsyncContext().userId],
     )
   ).rows[0] as Todo) ?? undefined;
 &nbsp;
-export const insertDbTodo = <span class="fstat-no" title="function not covered" >async (</span>
-  body: PayloadPostTodosCreateRequest,
-): Promise&lt;Todo&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+export const insertDbTodo = <span class="fstat-no" title="function not covered" >async (b</span>ody: PayloadPostTodos): Promise&lt;Todo&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 <span class="cstat-no" title="statement not covered" >  (</span>
     await query(
-      "insert into todo(content, priority) values($1, $2) returning *",
-      [body.content, body.priority],
+      'insert into todo(content, priority, "user") values($1, $2, $3) returning *',
+      [body.content, body.priority, getAsyncContext().userId],
     )
   ).rows[0];
 &nbsp;
@@ -184,14 +215,19 @@ export const selectDbTodo = <span class="fstat-no" title="function not covered" 
   limit: number,
 ): Promise&lt;Todo[]&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 <span class="cstat-no" title="statement not covered" >  (</span>
-    await query("select * from todo order by created_at offset $1 limit $2", [
-      offset,
-      limit,
-    ])
+    await query(
+      "select * from todo where user = $3 order by created_at offset $1 limit $2",
+      [offset, limit, getAsyncContext().userId],
+    )
   ).rows;
 &nbsp;
 export const deleteDbTodo = <span class="fstat-no" title="function not covered" >async (i</span>d: string): Promise&lt;number | null&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >  (await query("delete from todo where id = $1", [id])).rowCount;</span>
+<span class="cstat-no" title="statement not covered" >  (</span>
+    await query("delete from todo where id = $1 and user = $2", [
+      id,
+      getAsyncContext().userId,
+    ])
+  ).rowCount;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -199,7 +235,7 @@ export const deleteDbTodo = <span class="fstat-no" title="function not covered" 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-27T11:04:54.001Z
+                at 2024-05-03T12:08:00.533Z
             </div>
         <script src="../prettify.js"></script>
         <script>
