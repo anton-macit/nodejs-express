@@ -7,8 +7,8 @@ import {
   JwtPayload,
   verifyJwtToken,
 } from "@Services/jwtService";
-import * as jwtService from "@Services/jwtService";
-import { User } from "../../src/generated/database";
+import mongoose from "mongoose";
+import { IUser } from "../../src/dbEntities/User";
 
 describe("jwtService tests", () => {
   test("getHash/checkPassword", async () => {
@@ -20,9 +20,11 @@ describe("jwtService tests", () => {
   test("getJwtToken/verifyJwtToken", () => {
     const payload: JwtPayload = {
       user: {
-        id: randomUUID(),
+        id: randomUUID().toString(),
         username: "username",
         created_at: new Date().toUTCString(),
+        updated_at: new Date().toUTCString(),
+        __v: 0,
       },
       signingTimestamp: new Date().toUTCString(),
       expiresIn: "1h",
@@ -35,13 +37,15 @@ describe("jwtService tests", () => {
   });
 
   test("dbUserToUserDto", () => {
-    const dbUser: User = {
-      id: randomUUID(),
+    const dbUser: IUser = {
+      _id: new mongoose.Types.ObjectId(),
       hash: "hash",
       username: "username",
       created_at: new Date(),
+      updated_at: new Date(),
+      __v: 0,
     };
     const userDto = dbUserToUserDto(dbUser);
-    expect(userDto.id).toEqual(dbUser.id);
+    expect(userDto.id).toEqual(dbUser._id.toString());
   });
 });

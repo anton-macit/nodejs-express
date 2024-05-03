@@ -7,7 +7,6 @@ import {
 } from "@Services/jwtService";
 import { config } from "@Config";
 import { selectDbUser } from "@Repositories/UsersRepository";
-import mongoose from "mongoose";
 import { PayloadPostLogin, postLoginRequest } from "../api/post_login";
 import HttpForbidden from "../errors/HttpForbidden";
 
