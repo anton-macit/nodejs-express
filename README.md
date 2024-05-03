@@ -4,7 +4,7 @@
 - `coverage` Coverage report
 - `infr` Terraform plans to create AWS Lambda 
 - `logs` To save logs on local environment
-- `migrations` SQL DB migrations. To apply run `DATABASE_URL=.... yarn node-pg-migrate up`
+- `migrations` SQL DB migrations. To apply run `yarn migrate:up`
 - `src` Source code. See [src/README.md](src/README.md)
 - `test` Unit tests
 - `.env.example` List of needed environment variables
@@ -12,4 +12,5 @@
 
 TODO:
 - test coverage should be increased (jwtService and Controllers)
+- husky: run tests before commit; run pg-to-ts; api-to-ts
 - deploy to AWS should be added

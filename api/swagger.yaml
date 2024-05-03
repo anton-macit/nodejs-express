@@ -40,7 +40,7 @@ paths:
                   auth_token:
                     type: string
         '403':
-          description: Unauthorized. User does not exist with the provided credentials
+          description: Forbidden. User does not exist with the provided credentials
   /users:
     post:
       tags:
