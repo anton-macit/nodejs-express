@@ -3,7 +3,9 @@ import * as jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { User } from "../generated/database";
 
-export type UserDto = Omit<User, "hash">;
+export type UserDto = Omit<User, "hash" | "created_at"> & {
+  created_at: Date | string;
+};
 
 export const dbUserToUserDto = (dbUser: User): UserDto => {
   const { hash, ...user } = dbUser;
@@ -18,9 +20,6 @@ export interface JwtPayload {
 
 export const getJwtToken = (data: JwtPayload) => {
   const jwtSecret = config.get("jwt.secret");
-  if (jwtSecret === "") {
-    throw new Error("Empty JWT secret");
-  }
   return jwt.sign(data, jwtSecret, {
     expiresIn: data.expiresIn,
   });

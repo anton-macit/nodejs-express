@@ -11,7 +11,8 @@
     "startold": "concurrently 'npx tsc -w' 'npx tsc-alias -w' 'node dist/src/index.js'",
     "format": "npx prettier src test --write",
     "lint": "npx eslint src test --ext .ts --fix",
-    "pg-to-ts": "pg-to-ts generate -c ${DATABASE_URL} -o src/generated/database.ts",
+    "pg-to-ts": "pg-to-ts generate -c ${DB_CONNECTION_STRING} -o src/generated/database.ts",
+    "migrate:up": "DATABASE_URL=\"${DB_CONNECTION_STRING}\" node-pg-migrate up",
     "api-to-html": "yarn redocly build-docs api/swagger.yaml -o api/index.html",
     "api-to-ts": "yarn openapi --input api/swagger.yaml --output src/generated/api"
   },
