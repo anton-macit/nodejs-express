@@ -37,6 +37,9 @@ export class TodoService {
                 'offset': offset,
                 'limit': limit,
             },
+            errors: {
+                401: `Unauthorized. Token expired`,
+            },
         });
     }
     /**
@@ -53,6 +56,9 @@ export class TodoService {
             url: '/todos',
             body: requestBody,
             mediaType: 'application/json',
+            errors: {
+                401: `Unauthorized. Token expired`,
+            },
         });
     }
     /**
@@ -71,6 +77,7 @@ export class TodoService {
                 'id': id,
             },
             errors: {
+                401: `Unauthorized. Token expired`,
                 404: `Not found`,
             },
         });
@@ -95,6 +102,7 @@ export class TodoService {
             body: requestBody,
             mediaType: 'application/json',
             errors: {
+                401: `Unauthorized. Token expired`,
                 404: `Not found`,
             },
         });
@@ -115,6 +123,7 @@ export class TodoService {
                 'id': id,
             },
             errors: {
+                401: `Unauthorized. Token expired`,
                 404: `Not found`,
             },
         });
