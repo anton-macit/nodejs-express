@@ -6,6 +6,7 @@ import { log, morganMiddleware } from "@Log";
 import { config } from "@Config";
 import { error } from "@Utils/error";
 import { closeDbConnections } from "@Repositories/__query";
+import serverless from "serverless-http";
 import { router } from "./router";
 import { generateCorrelationIdMiddleware } from "./middlewares";
 
@@ -48,9 +49,13 @@ app.use(((err, req, res, next) => {
   next(err);
 }) as ErrorRequestHandler);
 
-app.listen(config.get("port"), () => {
-  log.info(`Server is running at 'http://localhost:${config.get("port")}'`);
-});
+if (config.get("env") !== "dev") {
+  app.listen(config.get("port"), () => {
+    log.info(`Server is running at 'http://localhost:${config.get("port")}'`);
+  });
+}
+
+export const handler = serverless(app);
 
 // noinspection JSUnusedGlobalSymbols
 // catching signals and do something before exit
