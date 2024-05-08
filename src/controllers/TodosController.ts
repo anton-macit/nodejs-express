@@ -17,11 +17,11 @@ export const createTodoItem = async (req: Request, res: Response) => {
 
 export const listTodosItems = async (req: Request, res: Response) => {
   const params = await paramsGetTodos.validate({
-    offset: req.params.offset ? Number(req.params.offset) : 0,
-    limit: req.params.limit ? Number(req.params.limit) : 10,
+    offset: req.params.offset,
+    limit: req.params.limit,
   });
-  const offset = params.offset ?? 0;
-  const limit = params.limit ?? 10;
+  const offset = Number(params.offset ?? 0);
+  const limit = Number(params.limit ?? 10);
   const items = await listTodoItemsService(offset, limit);
 
   res.json({ items, offset, limit } satisfies ResponseGetTodos);

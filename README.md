@@ -11,6 +11,6 @@
 - `.yarnrc` To lock packages versions in `yarn.lock`. To update `yarn.lock` run `mv .yarnrc .yarnrc- ; yarn ; mv .yarnrc- .yarnrc`
 
 TODO:
-- test coverage should be increased (jwtService and Controllers)
-- husky: run tests before commit; run pg-to-ts; api-to-ts
+- jest: remove coverage folder from git and check coverage value on commit
+- husky: run tests before commit
 - deploy to AWS should be added

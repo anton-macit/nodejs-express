@@ -11,7 +11,5 @@ export const insertDbUser = async (
     )
   ).rows[0];
 
-export const selectDbUser = async (
-  username: string,
-): Promise<User | undefined> =>
+export const getDbUser = async (username: string): Promise<User | undefined> =>
   (await query('select * from "user" where username = $1', [username])).rows[0];

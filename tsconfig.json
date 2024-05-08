@@ -21,7 +21,7 @@
     "paths": {
       "@Async": ["src/asyncContext/index"],
       "@Src": ["src/index"],
-      "@Sqs/*": ["src/sqs/*"],
+      "@Controllers/*": ["src/controllers/*"],
       "@Log": ["src/log/index"],
       "@Services/*": ["src/services/*"],
       "@Repositories/*": ["src/repositories/*"],

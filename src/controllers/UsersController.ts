@@ -1,6 +1,4 @@
 import { Request, Response } from "express";
-// import { createUserService } from "@Services/UsersService";
-// import { PayloadPostUsers, postUsersRequest } from "../api/users/post_users";
 import { createUsersService } from "@Services/UsersService";
 import { PayloadPostUsers, postUsersRequest } from "../api/users/post_users";
 
