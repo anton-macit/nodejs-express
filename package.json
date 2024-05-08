@@ -14,7 +14,9 @@
     "pg-to-ts": "pg-to-ts generate -c ${DB_CONNECTION_STRING} -o src/generated/database.ts",
     "migrate:up": "DATABASE_URL=\"${DB_CONNECTION_STRING}\" node-pg-migrate up",
     "api-to-html": "yarn redocly build-docs api/swagger.yaml -o api/index.html",
-    "api-to-ts": "yarn openapi --input api/swagger.yaml --output src/generated/api"
+    "api-to-ts": "yarn openapi --input api/swagger.yaml --output src/generated/api",
+    "prepare": "husky",
+    "test": "jest"
   },
   "dependencies": {
     "@types/pg": "^8.11.4",
@@ -67,6 +69,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "express-async-handler": "^1.2.0",
+    "husky": "^9.0.11",
     "jest": "^29.7.0",
     "jest-html-reporter": "^3.10.2",
     "node-pg-migrate": "^6.2.2",
