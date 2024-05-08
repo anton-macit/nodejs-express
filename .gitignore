@@ -67,3 +67,6 @@ package-lock.json
 
 # Terraform
 .terraform/
+
+# Coverage
+coverage/

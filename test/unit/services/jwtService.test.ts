@@ -8,7 +8,8 @@ import {
   verifyJwtToken,
 } from "@Services/jwtService";
 import * as jwtService from "@Services/jwtService";
-import { User } from "../../src/generated/database";
+import { config } from "@Config";
+import { User } from "../../../src/generated/database";
 
 describe("jwtService tests", () => {
   test("getHash/checkPassword", async () => {
@@ -18,6 +19,7 @@ describe("jwtService tests", () => {
   });
 
   test("getJwtToken/verifyJwtToken", () => {
+    config.set("jwt.secret", randomUUID());
     const payload: JwtPayload = {
       user: {
         id: randomUUID(),

@@ -23,13 +23,17 @@ module.exports = {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: undefined,
+  collectCoverageFrom: ["src/controllers/*.ts", "src/services/*.ts"],
 
   // The directory where Jest should output its coverage files
   // coverageDirectory: undefined,
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: ["/node_modules/", "/dist/"],
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "/dist/",
+    "src/controllers/StatusController.ts",
+  ],
 
   // Indicates which provider should be used to instrument code for coverage
   // coverageProvider: "babel",
@@ -40,7 +44,10 @@ module.exports = {
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
-      lines: 25, // todo return it
+      lines: 100,
+      functions: 100,
+      statements: 100,
+      branches: 100,
     },
   },
 

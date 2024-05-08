@@ -6,63 +6,42 @@ import {
   listTodoItemsService,
   updateTodoItemService,
 } from "@Services/TodosService";
+import { Todo } from "../../../src/generated/database";
 
 describe("TodosService tests", () => {
+  const todoStub = (body?: {
+    content?: string | undefined;
+    priority?: number | undefined;
+  }) =>
+    ({
+      id: "1",
+      content: body?.content ?? "1",
+      priority: body?.priority ?? 0,
+      created_at: new Date(),
+      user: "",
+    }) satisfies Todo;
+
   beforeEach(() => {
-    jest.spyOn(todoRepository, "getDbTodo").mockImplementation((todoId) =>
-      Promise.resolve(
-        todoId === "1"
-          ? {
-              id: "1",
-              content: "1",
-              priority: 0,
-              created_at: new Date(),
-              user: "",
-            }
-          : undefined,
-      ),
-    );
+    jest
+      .spyOn(todoRepository, "getDbTodo")
+      .mockImplementation((todoId) =>
+        Promise.resolve(todoId === "1" ? todoStub() : undefined),
+      );
 
     jest
       .spyOn(todoRepository, "updateDbTodo")
       .mockImplementation((todoId, body) =>
-        Promise.resolve(
-          todoId === "1"
-            ? {
-                id: "1",
-                content: body.content ?? "1",
-                priority: body.priority ?? 0,
-                created_at: new Date(),
-                user: "",
-              }
-            : undefined,
-        ),
+        Promise.resolve(todoId === "1" ? todoStub(body) : undefined),
       );
 
-    jest.spyOn(todoRepository, "insertDbTodo").mockImplementation((body) =>
-      Promise.resolve({
-        id: "1",
-        content: body.content ?? "1",
-        priority: body.priority ?? 0,
-        created_at: new Date(),
-        user: "",
-      }),
-    );
+    jest
+      .spyOn(todoRepository, "insertDbTodo")
+      .mockImplementation((body) => Promise.resolve(todoStub(body)));
 
     jest
       .spyOn(todoRepository, "selectDbTodo")
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .mockImplementation((_offset, _limit) =>
-        Promise.resolve([
-          {
-            id: "1",
-            content: "1",
-            priority: 0,
-            created_at: new Date(),
-            user: "",
-          },
-        ]),
-      );
+      .mockImplementation((_offset, _limit) => Promise.resolve([todoStub()]));
 
     jest
       .spyOn(todoRepository, "deleteDbTodo")
