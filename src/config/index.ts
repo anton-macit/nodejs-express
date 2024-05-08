@@ -2,11 +2,13 @@ import convict from "convict";
 import * as process from "process";
 import { local } from "./local";
 import { test } from "./test";
+import { dev } from "./dev";
 import "dotenv/config";
 
 const configs: any = {
   local,
   test,
+  dev,
 };
 
 export const config = convict({
@@ -24,7 +26,7 @@ export const config = convict({
   },
   env: {
     doc: "The application environment.",
-    format: ["local", "test"],
+    format: ["local", "test", "dev"], // local: local instance, dev: on AWS Lambda
     default: "local",
     env: "NODE_ENV",
   },
