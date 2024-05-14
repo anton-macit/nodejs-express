@@ -7,6 +7,7 @@ import { config } from "@Config";
 import { error } from "@Utils/error";
 import { closeDbConnections } from "@Repositories/__query";
 import serverless from "serverless-http";
+import { fillConfigFromAwsSettings } from "@Utils/fillConfigFromAwsSettings";
 import { router } from "./router";
 import { generateCorrelationIdMiddleware } from "./middlewares";
 
@@ -55,7 +56,10 @@ if (config.get("env") !== "dev") {
   });
 }
 
-export const handler = serverless(app);
+export const handler = async (event: Object, context: Object) => {
+  await fillConfigFromAwsSettings();
+  return serverless(app)(event, context);
+};
 
 // noinspection JSUnusedGlobalSymbols
 // catching signals and do something before exit

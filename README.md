@@ -23,8 +23,7 @@ yarn clean && \
   yarn package-deps && \
   AWS_PROFILE=todo-nodejs-express terraform -chdir=infr plan # or apply immediately
   
-AWS_PROFILE=todo-nodejs-express terraform -chdir=infr apply
+AWS_PROFILE=todo-nodejs-express terraform -chdir=infr apply -auto-approve
 ```
 
-TODO:
-- Add secrets to AWS
+Don't forget to fill settings secret in secrets manager 
