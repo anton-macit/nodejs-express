@@ -56,6 +56,15 @@ resource "aws_iam_policy" "iam_policy" {
         "ec2:DeleteNetworkInterface"
       ]
       Resource = ["*"]
+    },{
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:ListSecretVersionIds"
+      ],
+      "Resource": [
+        aws_secretsmanager_secret.secret.arn,
+      ]
     }]
   })
 
@@ -98,6 +107,7 @@ resource "aws_lambda_function" "lambda" {
   handler          = "index.handler"
   role             = aws_iam_role.iam_role.arn
   runtime          = "nodejs20.x"
+  timeout          = var.lambda_timeout
 
   layers = [
     aws_lambda_layer_version.lambda_deps_layer.arn
@@ -110,6 +120,8 @@ resource "aws_lambda_function" "lambda" {
   environment {
     variables = {
       "NODE_ENV": "dev"
+      "AWS_SECRET_NAME": var.secret_name
+      # "AWS_REGION" - AWS gives this variable itself
     }
   }
 }
@@ -123,3 +135,23 @@ output "function_url" {
   value = aws_lambda_function_url.url.function_url
 }
 
+resource "aws_secretsmanager_secret" "secret" {
+  name = "settings"
+}
+
+// fill real values on AWS side after applying
+variable "settings" {
+  default = {
+    dbConnectionString = ""
+    superAdminUsername = ""
+    superAdminPassword = ""
+    jwtSecret = ""
+  }
+
+  type = map(string)
+}
+
+resource "aws_secretsmanager_secret_version" "secret_version" {
+  secret_id     = aws_secretsmanager_secret.secret.id
+  secret_string = jsonencode(var.settings)
+}

@@ -12,6 +12,20 @@ const configs: any = {
 };
 
 export const config = convict({
+  aws: {
+    secretName: {
+      doc: "AWS secret name",
+      format: String,
+      default: "",
+      env: "AWS_SECRET_NAME",
+    },
+    region: {
+      doc: "AWS region",
+      format: String,
+      default: "",
+      env: "AWS_REGION",
+    },
+  },
   logLocally: {
     doc: "To save logs to files and to colorize",
     format: Boolean,
