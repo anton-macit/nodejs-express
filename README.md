@@ -12,6 +12,7 @@ This project intends to show:
 - logging approach
 - application code layers
 - context for every call
+- show deployed git commit on the `/status` endpoint
 
 Other, not so important, sides of this project:
 - using UUID as ID for entities
@@ -41,6 +42,7 @@ AWS_PROFILE=todo-nodejs-express terraform -chdir=infr init
 
 ```shell
 yarn clean && \
+  echo export const gitCommitHash=\"$(git rev-parse --short HEAD)$([[ -n "$(git status -s | grep -v infr/terraform.tfstate)" ]] && echo -dirty)\" > ./src/utils/gitCommitHash.ts && \
   yarn build && \
   yarn package-deps && \
   AWS_PROFILE=todo-nodejs-express terraform -chdir=infr plan # or apply immediately
