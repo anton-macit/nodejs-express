@@ -4,7 +4,7 @@ import { UserDto } from "@Services/jwtService";
 import { config } from "@Config";
 import { randomUUID } from "crypto";
 import { mockRequest, mockResponse } from "./MockUnitTest";
-import HttpForbidden from "../../../src/errors/HttpForbidden";
+import HttpForbidden from "../../../src/exceptions/HttpForbidden";
 
 describe("LoginController tests, admin", () => {
   beforeAll(() => {

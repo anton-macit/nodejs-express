@@ -1,3 +1,25 @@
+## About the project
+
+This project gives multi-users CRUD API for to-do items.
+The super-admin uses an endpoint to create users. Regular users manage their to-do items via other endpoints.
+
+This project intends to show:
+- using IaC to create infrastructure
+- migration procedure for an SQL database
+- having input validation and types for input type on the back-end side
+- generated types by SQL tables
+- way of exception processing
+- logging approach
+- application code layers
+- context for every call
+
+Other, not so important, sides of this project:
+- using UUID as ID for entities
+- 100% test coverage for controllers and services
+- JWT
+- ORM version (instead of raw SQL) is on its way
+- The NoSQL (MongoDB) version is on its way
+
 ## About directories and some files here
 
 - `api` [Swagger api specification](api/index.html)

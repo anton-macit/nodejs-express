@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { JwtPayload, verifyJwtToken } from "@Services/jwtService";
 import { config } from "@Config";
 import { getAsyncContext } from "@Async";
-import HttpUnauthorized from "../errors/HttpUnauthorized";
+import HttpUnauthorized from "../exceptions/HttpUnauthorized";
 
 export const adminOnly = (req: Request, res: Response, next: NextFunction) => {
   const bearerToken = req.headers?.authorization?.split(" ")[1];

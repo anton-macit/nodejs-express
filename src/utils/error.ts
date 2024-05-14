@@ -1,8 +1,8 @@
 import { Response } from "express";
 import { log } from "@Log";
 import { TokenExpiredError } from "jsonwebtoken";
-import HttpUnauthorized from "../errors/HttpUnauthorized";
-import HttpForbidden from "../errors/HttpForbidden";
+import HttpUnauthorized from "../exceptions/HttpUnauthorized";
+import HttpForbidden from "../exceptions/HttpForbidden";
 
 export const error = (res: Response, err: unknown, errorPoint = "") => {
   log.error(`Error ${errorPoint}`, err);
