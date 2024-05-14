@@ -4,7 +4,7 @@ import { config } from "@Config";
 import { loginAdmin, loginUser } from "@Services/LoginService";
 import { log } from "@Log";
 import { PayloadPostLogin, postLoginRequest } from "../api/post_login";
-import HttpForbidden from "../errors/HttpForbidden";
+import HttpForbidden from "../exceptions/HttpForbidden";
 
 export const loginController = async (req: Request, res: Response) => {
   await postLoginRequest.validate(req.body);

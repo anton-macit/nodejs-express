@@ -6,17 +6,14 @@
   Also see [api/README.md](api/README.md)
 - `asyncContext` - context for every call to trace requests
 - `config` - convict configs
-- `controllers` - all controllers
+- `controllers` - the 1rd tier of application
 - `controllers/StatusController.ts` - a status and test controller. A fake exception can appear, and we can check how it will be processed.
-- `errors` - login exceptions
+- `exceptions` - custom exceptions
 - `generated/api` - generated types from Swagger. To update, run `yarn api-to-ts`.
 - `generated/database.ts` - generated DB types from SQL. To generate it, run `DATABASE_URL=.... yarn pg-to-ts`
 - `log` - about logging
-- `middlewares` - middlewares to have traceId
-- `repositories` - repository functionality
+- `middlewares` - middlewares
+- `repositories` - the 3rd tier of application
 - `router` - Express routes
-- `services` - services functionality
-- `utils` - utils functionality
-
-TODO:
-- add ORM
+- `services` - the 2nd tier of application
+- `utils` - helpers and so on

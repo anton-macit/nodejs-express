@@ -9,7 +9,7 @@ import { closeDbConnections } from "@Repositories/__query";
 import serverless from "serverless-http";
 import { fillConfigFromAwsSettings } from "@Utils/fillConfigFromAwsSettings";
 import { router } from "./router";
-import { generateCorrelationIdMiddleware } from "./middlewares";
+import { generateCorrelationIdMiddleware } from "./middlewares/generateCorrelationIdMiddleware";
 
 const app: Express = express();
 
