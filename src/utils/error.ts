@@ -5,7 +5,7 @@ import HttpUnauthorized from "../errors/HttpUnauthorized";
 import HttpForbidden from "../errors/HttpForbidden";
 
 export const error = (res: Response, err: unknown, errorPoint = "") => {
-  log.error(`Error ${errorPoint}`, error);
+  log.error(`Error ${errorPoint}`, err);
 
   if (err instanceof HttpUnauthorized) {
     res.status(401).json({ error: "Unauthorized", message: err.message });

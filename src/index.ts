@@ -45,7 +45,7 @@ app.use("/", router);
 
 app.use(((err, req, res, next) => {
   if (!res.headersSent) {
-    error(res, err);
+    error(res, err, "ErrorRequestHandler");
   }
   next(err);
 }) as ErrorRequestHandler);
