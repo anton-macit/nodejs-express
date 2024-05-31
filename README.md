@@ -38,10 +38,13 @@ Other, not so important, sides of this project:
 AWS_PROFILE=todo-nodejs-express terraform -chdir=infr init
 ```
 
-## Deploy:
+## Commit & deploy & commit
 
 ```shell
-yarn clean && \
+git checkout ./src/utils/gitCommitHash.ts && \
+  git add . && \
+  git commit && \
+  yarn clean && \
   echo export const gitCommitHash=\"$(git rev-parse --short HEAD)$([[ -n "$(git status -s | grep -v infr/terraform.tfstate)" ]] && echo -dirty)\" > ./src/utils/gitCommitHash.ts && \
   yarn build && \
   yarn package-deps && \
