@@ -8,8 +8,10 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { CreateTodoItemDto } from './models/CreateTodoItemDto';
+export type { LoginPasswordDto } from './models/LoginPasswordDto';
 export type { TodoItem } from './models/TodoItem';
 export type { UpdateTodoItemDto } from './models/UpdateTodoItemDto';
+export type { UserDto } from './models/UserDto';
 
 export { TodoService } from './services/TodoService';
 export { UserService } from './services/UserService';
