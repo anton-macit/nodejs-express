@@ -2,6 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { LoginPasswordDto } from '../models/LoginPasswordDto';
+import type { UserDto } from '../models/UserDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -13,10 +15,7 @@ export class UserService {
      * @throws ApiError
      */
     public static postLogin(
-        requestBody: {
-            username: string;
-            password: string;
-        },
+        requestBody: LoginPasswordDto,
     ): CancelablePromise<{
         auth_token: string;
     }> {
@@ -26,29 +25,19 @@ export class UserService {
             body: requestBody,
             mediaType: 'application/json',
             errors: {
-                403: `Forbidden. User does not exist with the provided credentials`,
+                403: `Unauthorized. User does not exist with the provided credentials`,
             },
         });
     }
     /**
      * Create user. Only admin can do it
      * @param requestBody
-     * @returns any A new user created
+     * @returns UserDto A new user created
      * @throws ApiError
      */
     public static postUsers(
-        requestBody: {
-            username: string;
-            password: string;
-        },
-    ): CancelablePromise<{
-        id: string;
-        username: string;
-        /**
-         * Date
-         */
-        created_at: string;
-    }> {
+        requestBody: LoginPasswordDto,
+    ): CancelablePromise<UserDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users',
