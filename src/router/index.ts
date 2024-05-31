@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { statusController } from "../controllers/StatusController";
+import { createTodoItem, listTodosItems } from "@Controllers/TodosController";
 import {
-  updateTodoItem,
-  getTodoItem,
   deleteTodoItem,
-} from "../controllers/OneTodoController";
-import { createTodoItem, listTodosItems } from "../controllers/TodosController";
-import { createUser } from "../controllers/UsersController";
+  getTodoItem,
+  updateTodoItem,
+} from "@Controllers/OneTodoController";
+import { createUser } from "@Controllers/UsersController";
+import { loginController } from "@Controllers/LoginController";
+import { statusController } from "@Controllers/StatusController";
 import { RoutePatchTodos__id__ } from "../api/todos/__id__/patch_todos___id__";
 import { RoutePostTodos } from "../api/todos/post_todos";
 import { RouteGetTodos } from "../api/todos/get_todos";
@@ -15,7 +16,6 @@ import { RouteGetTodos__id__ } from "../api/todos/__id__/get_todos___id__";
 import { RoutePostUsers } from "../api/users/post_users";
 import { RoutePostLogin } from "../api/post_login";
 import { adminOnly, userOnly } from "../middlewares/authUser";
-import { loginController } from "../controllers/LoginController";
 
 const asyncHandler = require("express-async-handler");
 

@@ -1,8 +1,9 @@
-import { getDbUser } from "@Repositories/UsersRepository";
 import { log } from "@Log";
+import { config } from "@Config";
+import { getDbUser } from "@Repositories/UsersRepository";
 import { PayloadPostLogin } from "../api/post_login";
-import { config } from "../config";
-import { checkPassword, dbUserToUserDto, UserDto } from "./jwtService";
+import { checkPassword, dbUserToUserDto } from "./jwtService";
+import { UserDto } from "../generated/api";
 
 const adminId = "2223f3bc-a6fd-4432-a44b-fb02eaad982c";
 
@@ -16,12 +17,11 @@ export const loginAdmin = (body: PayloadPostLogin): false | UserDto => {
     return false;
   }
 
-  const user = {
+  return {
     id: adminId,
     username: body.username,
-    created_at: new Date(),
+    created_at: String(new Date()),
   } satisfies UserDto;
-  return user;
 };
 
 export const loginUser = async (

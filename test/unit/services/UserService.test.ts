@@ -1,5 +1,6 @@
-import * as userRepository from "@Repositories/UsersRepository";
 import { createUsersService } from "@Services/UsersService";
+import * as userRepository from "../../../src/repositories/UsersRepository";
+import { UserDto } from "../../../src/generated/api";
 
 describe("UserService tests", () => {
   beforeEach(() => {
@@ -7,8 +8,8 @@ describe("UserService tests", () => {
       Promise.resolve({
         id: "1",
         ...body,
-        created_at: new Date(),
-      }),
+        created_at: new Date().toUTCString(),
+      } as UserDto),
     );
   });
 

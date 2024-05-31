@@ -4,6 +4,7 @@ import {
   getTodoItemService,
   updateTodoItemService,
 } from "@Services/TodosService";
+import { log } from "@Log";
 import {
   patchTodosCreateRequest,
   PayloadPatchTodos__id__,
@@ -27,6 +28,8 @@ export const getTodoItem = async (req: Request, res: Response) => {
   if (!response) {
     res.status(404);
   }
+  log.debug(`response?.dataValues`, response?.dataValues);
+  log.debug(`response?.userId`, response?.userId);
   res.json(response);
 };
 

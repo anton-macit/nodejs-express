@@ -3,7 +3,7 @@ import {
   createTodoItemService,
   listTodoItemsService,
 } from "@Services/TodosService";
-import { paramsGetTodos, ResponseGetTodos } from "../api/todos/get_todos";
+import { paramsGetTodos } from "../api/todos/get_todos";
 import {
   PayloadPostTodos,
   postTodosCreateRequest,
@@ -24,5 +24,5 @@ export const listTodosItems = async (req: Request, res: Response) => {
   const limit = Number(params.limit ?? 10);
   const items = await listTodoItemsService(offset, limit);
 
-  res.json({ items, offset, limit } satisfies ResponseGetTodos);
+  res.json({ items, offset, limit });
 };

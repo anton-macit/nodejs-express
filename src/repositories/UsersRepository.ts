@@ -1,15 +1,26 @@
-import { query } from "./__query";
-import { User } from "../generated/database";
+import { getAsyncContext } from "@Async";
+import { LoginPasswordDto, UserDto } from "../generated/api";
+import { UserModel } from "../models/userModel";
 
 export const insertDbUser = async (
-  body: Omit<User, "id" | "created_at">,
-): Promise<User> =>
-  (
-    await query(
-      'insert into "user"(username, hash) values($1, $2) returning *',
-      [body.username, body.hash],
-    )
-  ).rows[0];
+  body: Omit<LoginPasswordDto, "password"> & { hash: string },
+): Promise<UserDto> => {
+  const userModel = await UserModel.create(
+    {
+      username: body.username,
+      hash: body.hash,
+    },
+    getAsyncContext().getTransaction(),
+  );
+  return {
+    id: userModel.id,
+    username: userModel.username,
+    created_at: String(userModel.createdAt),
+  };
+};
 
-export const getDbUser = async (username: string): Promise<User | undefined> =>
-  (await query('select * from "user" where username = $1', [username])).rows[0];
+export const getDbUser = (username: string): Promise<UserModel | null> =>
+  UserModel.findOne({
+    where: { username },
+    ...getAsyncContext().getTransaction(),
+  });

@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
-import { getJwtToken, UserDto } from "@Services/jwtService";
+import { getJwtToken } from "@Services/jwtService";
 import { config } from "@Config";
 import { loginAdmin, loginUser } from "@Services/LoginService";
 import { log } from "@Log";
 import { PayloadPostLogin, postLoginRequest } from "../api/post_login";
 import HttpForbidden from "../exceptions/HttpForbidden";
+import { UserDto } from "../generated/api";
 
 export const loginController = async (req: Request, res: Response) => {
   await postLoginRequest.validate(req.body);

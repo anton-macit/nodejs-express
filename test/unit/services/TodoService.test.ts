@@ -1,4 +1,3 @@
-import * as todoRepository from "@Repositories/TodosRepository";
 import {
   createTodoItemService,
   deleteTodoItemService,
@@ -6,7 +5,8 @@ import {
   listTodoItemsService,
   updateTodoItemService,
 } from "@Services/TodosService";
-import { Todo } from "../../../src/generated/database";
+import * as todoRepository from "../../../src/repositories/TodosRepository";
+import { TodoModel } from "../../../src/models/todoModel";
 
 describe("TodosService tests", () => {
   const todoStub = (body?: {
@@ -17,21 +17,21 @@ describe("TodosService tests", () => {
       id: "1",
       content: body?.content ?? "1",
       priority: body?.priority ?? 0,
-      created_at: new Date(),
-      user: "",
-    }) satisfies Todo;
+      createdAt: new Date(),
+      userId: "1",
+    }) as TodoModel;
 
   beforeEach(() => {
     jest
       .spyOn(todoRepository, "getDbTodo")
       .mockImplementation((todoId) =>
-        Promise.resolve(todoId === "1" ? todoStub() : undefined),
+        Promise.resolve(todoId === "1" ? todoStub() : null),
       );
 
     jest
       .spyOn(todoRepository, "updateDbTodo")
       .mockImplementation((todoId, body) =>
-        Promise.resolve(todoId === "1" ? todoStub(body) : undefined),
+        Promise.resolve(todoId === "1" ? todoStub(body) : null),
       );
 
     jest
@@ -53,7 +53,7 @@ describe("TodosService tests", () => {
   });
 
   test("Get not existed record from db", async () => {
-    expect(await getTodoItemService("2")).toBeUndefined();
+    expect(await getTodoItemService("2")).toBeNull();
   });
 
   test("Update existed record", async () => {
@@ -61,7 +61,7 @@ describe("TodosService tests", () => {
   });
 
   test("Update not existed record", async () => {
-    expect(await updateTodoItemService("2", { content: "2" })).toBeUndefined();
+    expect(await updateTodoItemService("2", { content: "2" })).toBeNull();
   });
 
   test("Insert record", async () => {

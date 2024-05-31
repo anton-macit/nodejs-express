@@ -1,10 +1,10 @@
 import * as controllers from "@Controllers/LoginController";
 import * as loginService from "@Services/LoginService";
-import { UserDto } from "@Services/jwtService";
 import { config } from "@Config";
 import { randomUUID } from "crypto";
 import { mockRequest, mockResponse } from "./MockUnitTest";
 import HttpForbidden from "../../../src/exceptions/HttpForbidden";
+import { UserDto } from "../../../src/generated/api";
 
 describe("LoginController tests, admin", () => {
   beforeAll(() => {
@@ -14,7 +14,7 @@ describe("LoginController tests, admin", () => {
       ({
         id: "1",
         username: "1",
-        created_at: new Date(),
+        created_at: new Date().toUTCString(),
       }) satisfies UserDto;
 
     jest

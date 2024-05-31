@@ -7,9 +7,8 @@ import {
   JwtPayload,
   verifyJwtToken,
 } from "@Services/jwtService";
-import * as jwtService from "@Services/jwtService";
 import { config } from "@Config";
-import { User } from "../../../src/generated/database";
+import { UserModel } from "../../../src/models/userModel";
 
 describe("jwtService tests", () => {
   test("getHash/checkPassword", async () => {
@@ -37,12 +36,12 @@ describe("jwtService tests", () => {
   });
 
   test("dbUserToUserDto", () => {
-    const dbUser: User = {
+    const dbUser: UserModel = {
       id: randomUUID(),
       hash: "hash",
       username: "username",
-      created_at: new Date(),
-    };
+      createdAt: new Date(),
+    } as UserModel;
     const userDto = dbUserToUserDto(dbUser);
     expect(userDto.id).toEqual(dbUser.id);
   });
