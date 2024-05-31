@@ -1,6 +1,7 @@
 import { AsyncLocalStorage } from "async_hooks";
 import { NextFunction } from "express";
 import { randomUUID } from "crypto";
+import { Transaction } from "sequelize";
 
 export class AsyncContext {
   correlationId: string;
@@ -10,6 +11,8 @@ export class AsyncContext {
   azureTraceParent?: string | null | undefined;
 
   private _userId?: string | undefined; // UUID
+
+  private _transaction?: Transaction;
 
   constructor(params: {
     correlationId: string;
@@ -33,6 +36,27 @@ export class AsyncContext {
       })()
     );
   }
+
+  public set transaction(transaction: Transaction) {
+    this._transaction = transaction;
+  }
+
+  public get transaction(): Transaction {
+    return (
+      this._transaction ||
+      (() => {
+        throw new Error("Cannot get transaction from context");
+      })()
+    );
+  }
+
+  public getTransaction = (): { transaction: Transaction } => ({
+    transaction:
+      this._transaction ||
+      (() => {
+        throw new Error("Cannot get transaction from context");
+      })(),
+  });
 }
 
 export const asyncLocalStorage = new AsyncLocalStorage<AsyncContext>();

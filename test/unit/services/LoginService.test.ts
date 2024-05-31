@@ -1,8 +1,8 @@
 import { config } from "@Config";
 import { randomUUID } from "crypto";
 import * as service from "@Services/LoginService";
-import * as usersRepository from "@Repositories/UsersRepository";
-import { User } from "../../../src/generated/database";
+import * as usersRepository from "../../../src/repositories/UsersRepository";
+import { UserModel } from "../../../src/models/userModel";
 
 describe("Login service tests, admin", () => {
   beforeEach(() => {
@@ -46,13 +46,13 @@ describe("Login service tests, user", () => {
         id: "1",
         username: "1",
         hash: "$2a$10$d/4JfSCzBzwEi84maF.8gOTZyO3Bgqx87IQwMzvfTJqukHxL2L8DK", // 123
-        created_at: new Date(),
-      }) satisfies User;
+        createdAt: new Date(),
+      }) as UserModel;
 
     jest
       .spyOn(usersRepository, "getDbUser")
-      .mockImplementation((username) =>
-        Promise.resolve(username === "1" ? userStub() : undefined),
+      .mockImplementation((username: string) =>
+        Promise.resolve(username === "1" ? userStub() : null),
       );
   });
 

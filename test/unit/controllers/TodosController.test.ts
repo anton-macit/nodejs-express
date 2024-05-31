@@ -2,7 +2,7 @@ import * as controllers from "@Controllers/TodosController";
 import * as todoService from "@Services/TodosService";
 import { ValidationError } from "yup";
 import { mockRequest, mockResponse } from "./MockUnitTest";
-import { Todo } from "../../../src/generated/database";
+import { TodoModel } from "../../../src/models/todoModel";
 
 describe("Todo tests", () => {
   beforeAll(() => {
@@ -14,7 +14,7 @@ describe("Todo tests", () => {
           id: "1",
           created_at: new Date(),
           user: "3",
-        } satisfies Todo),
+        } as unknown as TodoModel),
       );
 
     jest

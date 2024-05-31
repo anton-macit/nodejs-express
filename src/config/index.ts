@@ -12,6 +12,12 @@ const configs: any = {
 };
 
 export const config = convict({
+  delays: {
+    doc: "Delays for any operations",
+    format: Boolean,
+    default: false,
+    env: "DELAYS",
+  },
   aws: {
     secretName: {
       doc: "AWS secret name",
