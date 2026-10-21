@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: 0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - name: Lint
+        run: npx eslint src test --ext .ts && npx prettier --check src test
+      - name: Build
+        run: yarn build
+      - name: Unit tests (100% coverage threshold for controllers and services)
+        run: yarn test

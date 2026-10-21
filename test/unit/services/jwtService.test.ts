@@ -7,7 +7,6 @@ import {
   JwtPayload,
   verifyJwtToken,
 } from "@Services/jwtService";
-import * as jwtService from "@Services/jwtService";
 import { config } from "@Config";
 import { User } from "../../../src/generated/database";
 
