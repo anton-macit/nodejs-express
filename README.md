@@ -82,6 +82,7 @@ TOKEN=$(curl -s -X POST localhost:8080/login -H 'Content-Type: application/json'
   -d '{"username":"alice","password":"alice-password"}' | jq -r .auth_token)
 curl -X POST localhost:8080/todos -H "Authorization: Bearer $TOKEN" \
   -H 'Content-Type: application/json' -d '{"content":"Write the README","priority":1}'
+curl localhost:8080/todos -H "Authorization: Bearer $TOKEN"
 ```
 
 The full API is described in [api/swagger.yaml](api/swagger.yaml). Open `api/index.html`

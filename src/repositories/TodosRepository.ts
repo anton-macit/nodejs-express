@@ -22,7 +22,7 @@ export const updateDbTodo = async (
 ): Promise<Todo | undefined> =>
   ((
     await query(
-      "update todo set content = COALESCE($2, content), priority = COALESCE($3, priority) where id = $1 and user = $4 returning *",
+      'update todo set content = COALESCE($2, content), priority = COALESCE($3, priority) where id = $1 and "user" = $4 returning *',
       [id, body.content, body.priority, getAsyncContext().userId],
     )
   ).rows[0] as Todo) ?? undefined;
@@ -41,14 +41,14 @@ export const selectDbTodo = async (
 ): Promise<Todo[]> =>
   (
     await query(
-      "select * from todo where user = $3 order by created_at offset $1 limit $2",
+      'select * from todo where "user" = $3 order by created_at offset $1 limit $2',
       [offset, limit, getAsyncContext().userId],
     )
   ).rows;
 
 export const deleteDbTodo = async (id: string): Promise<number | null> =>
   (
-    await query("delete from todo where id = $1 and user = $2", [
+    await query('delete from todo where id = $1 and "user" = $2', [
       id,
       getAsyncContext().userId,
     ])
