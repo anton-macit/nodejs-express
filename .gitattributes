@@ -1,0 +1,3 @@
+# Generated files: excluded from GitHub language stats and collapsed in diffs
+api/index.html linguist-generated=true
+src/generated/** linguist-generated=true
