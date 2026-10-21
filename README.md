@@ -117,10 +117,24 @@ The app is deployed as a Lambda function with a public Function URL. Sensitive s
 at runtime from the `settings` secret in AWS Secrets Manager. Terraform creates the
 secret with empty values, so fill in the real values in AWS after the first `apply`.
 
-Initialize Terraform once:
+Terraform state lives in S3 with DynamoDB locking. The bucket and table names are not
+committed. Create them once:
 
 ```shell
-AWS_PROFILE=todo-nodejs-express terraform -chdir=infr init
+export AWS_PROFILE=todo-nodejs-express BUCKET=<unique-bucket-name>
+aws s3api create-bucket --bucket $BUCKET --region eu-central-1 \
+  --create-bucket-configuration LocationConstraint=eu-central-1
+aws s3api put-bucket-versioning --bucket $BUCKET --versioning-configuration Status=Enabled
+aws s3api put-public-access-block --bucket $BUCKET --public-access-block-configuration \
+  BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+aws dynamodb create-table --table-name terraform-locks --region eu-central-1 --billing-mode PAY_PER_REQUEST \
+  --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH
+```
+
+Then copy `infr/backend.hcl.example` to `infr/backend.hcl`, fill in the names and initialize Terraform:
+
+```shell
+AWS_PROFILE=todo-nodejs-express terraform -chdir=infr init -backend-config=backend.hcl
 ```
 
 Commit, build and deploy. The deployed commit hash is baked into the build and shown on `/status`:
@@ -137,8 +151,6 @@ git checkout ./src/utils/gitCommitHash.ts && \
 
 AWS_PROFILE=todo-nodejs-express terraform -chdir=infr apply -auto-approve
 ```
-
-Terraform state is not committed to the repository (see `.gitignore`).
 
 ## Alternative implementations
 
