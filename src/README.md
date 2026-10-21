@@ -6,7 +6,7 @@
   Also see [api/README.md](api/README.md)
 - `asyncContext` - context for every call to trace requests
 - `config` - convict configs
-- `controllers` - the 1rd tier of application
+- `controllers` - the 1st tier of application
 - `controllers/StatusController.ts` - a status and test controller. A fake exception can appear, and we can check how it will be processed.
 - `exceptions` - custom exceptions
 - `generated/api` - generated types from Swagger. To update, run `yarn api-to-ts`.
