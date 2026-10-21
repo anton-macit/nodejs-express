@@ -67,6 +67,10 @@ package-lock.json
 
 # Terraform
 .terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
 
 # Coverage
 coverage/
